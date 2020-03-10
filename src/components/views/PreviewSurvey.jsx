@@ -1,67 +1,38 @@
-/*
-
-
-
-
-
-You should use the SurveyDetails page for the moment
-
-I'm keeping this page as it is useful for the different question types
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { Component } from 'react';
 import axios from 'axios';
 import Spinner from '../layout/Spinner.jsx';
 import Header from '../layout/Header.jsx';
-import Button from '../layout/Button.jsx';
-// import { Link } from 'react-router-dom';
+import SectionNav from '../layout/SectionNav.jsx';
+// import Button from '../layout/Button.jsx';
 
-class ViewSurvey extends Component {
+import YesNoQuestion from '../questions/questionTypes/YesNoQuestion.jsx';
+import DropdownQuestion from '../questions/questionTypes/DropdownQuestion.jsx';
+import TextBoxQuestion from '../questions/questionTypes/TextBoxQuestion.jsx';
+import { Link } from 'react-router-dom';
+// import RadioQuestion
+
+class PreviewSurvey extends Component {
 
     constructor(){
         super();
-        this.state = { 
+        this.state = {
+            _id: "",
+            currentSection: "Current Section",
             listOfQuestions: [],
             surveyHeading: "",
             description: "",
-            loading: false
+            questionText: "questionText",
+            questionType: "",
+            listOfOptions: [],
+            loading: false,
+            editMode: false
         };
     }
 
     getAllQuestions = () => {
         this.setState( { loading: true } );
-        // Temporarily hardcode the ID 
-        const id = '5e639431d9145f0344fdfd53';
-        axios.get(`http://localhost:5000/api/surveys/${id}`)
+        const { params } = this.props.match;
+        axios.get(`http://localhost:5000/api/surveys/${params.id}`)
         .then( responseFromApi => {
             const heading = responseFromApi.data.title;
             const questions = responseFromApi.data.questions;
@@ -80,22 +51,9 @@ class ViewSurvey extends Component {
         this.getAllQuestions();
      }
 
-     deleteSurvey = () => {
-        const { params } = this.props.match;
-        console.log(params);
-        // params will look something like: {id: "5e616de1baac6128546c3129"}
-        axios.delete(`http://localhost:5000/api/surveys/${params.id}`)
-        .then( () => {
-            this.props.history.push('/surveys'); // !!!
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-    }   
-
       render(){
 
-        const { loading, surveyHeading, description, listOfQuestions } = this.state;
+        const { loading, surveyHeading, description, listOfQuestions, currentSection, questionText } = this.state;
         
         if (loading) { 
             return <Spinner />;
@@ -103,50 +61,32 @@ class ViewSurvey extends Component {
     
         return(
           <div>
-
+                <Header title={'Survey Stueff'}/>
+                <SectionNav sections={['Sec1', 'Sec2']}/>
+                <Link to={'/surveys'}>Back to Surveys</Link>
               <h1>{surveyHeading}</h1>
-                <Header title={'Survey Stuff'}/>
-                <Button text={'Next2'}/>
               <small>{description}</small>
+              <h1>{currentSection}</h1>
+              <h2>{questionText}</h2>
             <div>
                 {/* Add Conditional Rendering which only runs this function if questions.length > 0. */}
                     { listOfQuestions.map( element => {
 
                         if (element.questionType === 'textBox') {
                             return (
-                                <tr id={element._id}>
-                                    <td>{element.questionText}</td>
-                                    <td>
-                                        <input type="text" value={this.state.title} />
-                                    </td>
-                                </tr>
+                                <TextBoxQuestion _id={element._id} questionText={element.questionText}/>
                             )
                         }
 
                         else if (element.questionType === 'yesNo') {
                             return (
-                                <div key={element._id}>
-
-                                    <label htmlFor="yes_no_radio">{element.questionText}</label>
-                                        <input type="radio" name="yes_no">Yes</input>
-                                        <input type="radio" name="yes_no">No</input>
-
-                                </div>
+                                <YesNoQuestion _id={element._id} questionText={element.questionText}/>
                             )
                         }
 
                         else if (element.questionType === 'dropdown') {
                             return (
-                                <div key={element._id}>
-                                    <label htmlFor="question-type">{element.questionText}</label>
-                                        <select id="question-type" name="questionType">
-                                            <option value="Select">Select</option>
-                                            <option value="option-1">Option 1</option>
-                                            <option value="option-2">Option 2</option>
-                                            <option value="option-3">Option 3</option>
-                                            <option value="option-4">Option 4</option>
-                                        </select>
-                                </div>
+                                <DropdownQuestion _id={element._id} questionText={element.questionText} options={['op1', 'op2', 'op3']}/>
                             )
                         }
 
@@ -179,4 +119,4 @@ class ViewSurvey extends Component {
 
 }
 
-export default ViewSurvey;
+export default PreviewSurvey;

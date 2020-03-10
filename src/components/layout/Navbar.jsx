@@ -14,6 +14,18 @@ const Navbar = ( { icon, title } ) => {
                     <Link to='/'>Home</Link>
                 </li>
                 <li>
+                    <Link to='/create-survey'>Create</Link>
+                </li>
+                <li>
+                    <Link to='/surveys'>Surveys</Link>
+                </li>
+                <li>
+                    <Link to='/view-survey'>Read</Link>
+                </li>
+                <li>
+                    <Link to='/edit-survey'>Update</Link>
+                </li>
+                <li>
                     <Link to='/about'>About</Link>
                 </li>
             </ul>
