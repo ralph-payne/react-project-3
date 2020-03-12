@@ -14,13 +14,13 @@ class CreateSurvey extends Component {
     event.preventDefault();
     const {title, description} = this.state;
     axios.post("http://localhost:5000/api/surveys", { title, description })
-    .then( () => {
-        // this.props.getData();
-        this.setState({title: "", description: ""});
-        this.props.history.push('/surveys');
-    })
-    .catch( error => console.log(error) );
-    }
+        .then( () => {
+            // this.props.getData();
+            this.setState({title: "", description: ""});
+            this.props.history.push('/surveys');
+        })
+        .catch( error => console.log(error) );
+        }
 
     handleChange = (event) => {
         const {name, value} = event.target;

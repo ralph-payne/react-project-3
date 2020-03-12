@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Spinner from '../layout/Spinner.jsx';
 import Header from '../layout/Header.jsx';
-import SectionNav from '../layout/SectionNav.jsx';
+import SectionNav from '../questions/SectionNav.jsx';
 // import Button from '../layout/Button.jsx';
 
 import YesNoQuestion from '../questions/questionTypes/YesNoQuestion.jsx';

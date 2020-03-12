@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import AddOption from './AddOption.jsx';
 // import Button from '../layout/Button.jsx';
 
 class AddQuestion extends Component {
+
   constructor(props){
       super(props);
       this.state = { 
@@ -10,28 +13,30 @@ class AddQuestion extends Component {
           description: "",
           questionType: "Select",
           options: null, 
-          isShowing: false
+          questionFormIsShowing: false
         };
   }
 
-  handleFormSubmit = (event) => {
+  handleQuestionFormSubmit = (event) => {
     event.preventDefault();
-    const title = this.state.title;
+    const questionTitle = this.state.title;
+    console.log(questionTitle);    
     const description = this.state.description;
+    console.log(description);        
     const questionType = this.state.questionType;
-    // we need to know to which survey the created task belong, so we need to get its 'id'
-    // it has to be the 'id' because we are referencing survey
-    // by its id in the task model on the server side ( survey: {type: Schema.Types.ObjectId, ref: 'Survey'})
-    const surveyId = this.props.theSurvey._id;
-    // console.log(title);
-    // { title, description, projectID } => this is 'req.body' that will be received on the server side in this route,
-    // so the names have to match
-    axios.post("http://localhost:5000/api/questions", { title, description, questionType, surveyId })
+    const sectionId = this.props.currentSectionObject._id;
+    console.log(sectionId);
+    // we need to know to which survey the created task belong, so we need to get its 'id'. It has to be the 'id' because we are referencing survey
+    // By its id in the task model on the server side ( survey: {type: Schema.Types.ObjectId, ref: 'Survey'})
+    // const surveyId = this.props.theSurvey._id;
+    axios.post("http://localhost:5000/api/questions", 
+    { questionTitle, description, questionType, sectionId })
     .then( (data) => {
         console.log(data);
           // after submitting the form, retrieve survey one more time so the new task is displayed. Reset the fields for good UX
         this.props.getTheSurvey();
-        this.setState({title: "", description: "", questionType: "Select"});
+        this.props.getSingleSection(sectionId);        
+        this.setState({title: "", description: ""});
     })
     .catch( error => console.log(error) )
   }
@@ -41,59 +46,84 @@ class AddQuestion extends Component {
     this.setState({[name]: value});
   }
 
-  toggleForm = () => {
-    // this.setState({isShowing: !this.setState.isShowing})
-    if(!this.state.isShowing){
-      this.setState({isShowing: true});
+  toggleQuestionForm = () => {
+    if(!this.state.questionFormIsShowing){
+      this.setState({questionFormIsShowing: true});
     } else {
-      this.setState({isShowing: false});
+      this.setState({questionFormIsShowing: false});
     }
   }
 
+  toolbarOptionSelected = (e) => {
+    const idOfQuestionTypeSelected = e.target.id;
+    // console.log(idOfQuestionTypeSelected);
+    this.setState(
+        {questionType: idOfQuestionTypeSelected}
+    );
+  }
+
+  showOptions = () => {
+    // console.log(this.state);
+        if (this.state.questionType === "dropdownOption" || this.state.questionType === "radio") {
+            // console.log('dropdown or radio selected');
+            return <AddOption addQuestionState={this.state} getTheSurvey={this.props.getTheSurvey}/>
+        }
+            return false;
+    }
+
   showAddQuestionForm = () => {
-    if(this.state.isShowing){
+    if(this.state.questionFormIsShowing){
       return (
         <div>
-          <h3>Add Question</h3>
-          <form onSubmit={e => this.handleFormSubmit(e)}>
-          
+          <div>
+            <form onSubmit={ e => this.handleQuestionFormSubmit(e)}>
+                <h2>{this.state.questionType}</h2>
                 <div style={{width:"50%", display:"inline-block"}}>
-                    <label>Title:</label>
+                    <label>Question Text:</label>
                     <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
                     <label>Description:</label>
                     <textarea name="description" value={this.state.description} onChange={ e => this.handleChange(e)} />
+                    <button onClick={() => this.showOptions()}>Add Option</button>
+                    <div>{this.showOptions()} </div>
                 </div>
 
-                <div style={{width:"50%"}}>
-                    <label htmlFor="question-type">Question Type</label>
-                    <select id="question-type" name="questionType" onChange={ e => this.handleChange(e)} value={this.state.value}>
-                        <option value="Select">Select</option>
-                        <option value="textBox">Text Box</option>
-                        <option value="yesNo">Yes/No Question</option>
-                        <option value="dropdown">Dropdown</option>
-                        <option value="radio">Radio</option>
-                    </select>
+                <div style={{width:"50%", display:"inline-block"}}>
+                    <ul>
+                        <div id="textBoxOption" onClick={(e) => this.toolbarOptionSelected(e)}>Text Box</div>
+                        <div id="yesNoOption" onClick={(e) => this.toolbarOptionSelected(e)}>Yes/No Question</div>
+                        <div id="dropdownOption" onClick={(e) => this.toolbarOptionSelected(e)}>Dropdown</div>
+                        <div id="radioOption" onClick={(e) => this.toolbarOptionSelected(e)}>Radio</div>
+                    </ul>
                 </div>
                 <input type="submit" value="Submit" />
-          </form>
+
+            </form>
+          </div>
         </div>
       );
     }
   }
 
+
+
   render() {
         
     return(
       <div>
-        <hr />
-        <button onClick={() => this.toggleForm()}>Add Question</button>
-        { this.showAddQuestionForm() }
-        {/* { this.state.isShowing &&  addTaskForm} */}
         <hr/>
-        
+        <button onClick={() => this.toggleQuestionForm()}>Add Question</button>
+        { this.showAddQuestionForm() }
+        <hr/>
       </div>
     );
   }
+}
+
+AddQuestion.propTypes = {
+    theSurvey: PropTypes.object.isRequired,
+    getTheSurvey: PropTypes.func.isRequired,
+    getSingleSection: PropTypes.func.isRequired,
+    currentSectionObject: PropTypes.object.isRequired,
 }
 
 export default AddQuestion;

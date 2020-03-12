@@ -1,14 +1,9 @@
-// Survey Details is the Read part of CRUD
-
 import React, { Component } from 'react';
 import axios from 'axios';
-// import EditSurvey from './EditSurvey';
 import AddQuestion from '../questions/AddQuestion';
 import { Link } from 'react-router-dom';
 import Header from '../layout/Header.jsx';
-// import Toolbar from '../layout/Toolbar.jsx';
-import SectionNav from '../layout/SectionNav.jsx';
-// import Button from '../layout/Button.jsx';
+import SectionNav from '../questions/SectionNav.jsx';
 
 class SurveyDetails extends Component {
 
@@ -16,13 +11,16 @@ class SurveyDetails extends Component {
       super(props);
       this.state = {
         _id: "",
-        section: null,
+        // Perhaps make this questions for all survey?
         questions: [],
-        sections: [],        
+        // questionsFromSelectedSection: [],
+        sections: [],
+        currentSectionObject: {},      
         title: "",
         description: "",
+        // Current section and current section ID should eventually be together in the same object
         currentSection: "",
-        questionTest: "",
+        currentSectionId: "",
         editMode: true
       };
     }
@@ -47,20 +45,13 @@ class SurveyDetails extends Component {
         axios.get(`http://localhost:5000/api/surveys/${params.id}`)
         .then( responseFromApi => {
 
-            const questionsRetrievedFromApi = responseFromApi.data.questions;
             const titleRetrievedFromApi = responseFromApi.data.title;
             const descriptionRetrievedFromApi = responseFromApi.data.description;
             const surveyId = responseFromApi.data._id;
             const sectionsRetrievedFromApi = responseFromApi.data.sections;
-            // console.log('Response from API:');
-            // console.log(responseFromApi);            
-            // console.log('Sections retrieved from API in Survey Details');
-            // console.log(sectionsRetrievedFromApi);      
-            // console.log('Questions retrieved from API in Survey Details');
-            // console.log(questionsRetrievedFromApi);              
+
             this.setState({
                 _id: surveyId,
-                questions: questionsRetrievedFromApi,
                 title: titleRetrievedFromApi,
                 description: descriptionRetrievedFromApi,
                 sections: sectionsRetrievedFromApi
@@ -68,7 +59,6 @@ class SurveyDetails extends Component {
         })
         .catch(err => console.log(err));
     }
-
 
     deleteSurvey = () => {
         const { params } = this.props.match;
@@ -79,36 +69,76 @@ class SurveyDetails extends Component {
         .catch((err)=>{
             console.log(err)
         })
-    }      
+    }
 
-      renderAddQuestionForm = () => {
-        if(!this.state.title){
+    deleteSection = (delId) => {
+        const idWithDelPrefix = delId.target.id;
+        const sectionIdToDelete = idWithDelPrefix.substring(8);   
+
+        axios.delete(`http://localhost:5000/api/sections/${sectionIdToDelete}`)
+        .then( (data) => {
+            this.setState({ currentSectionObject: {} })
             this.getSingleSurvey();
-          } else {
-            // pass the survey and getSingleSurvey() method as a props down to AddQuestion component
-            return <AddQuestion theSurvey={this.state} getTheSurvey={this.getSingleSurvey} />
-        }}
-    
-      renderArrayOfQuestionDivs() {
-        if (this.state.questions) {
-          const arrayOfQuestionDivs = this.state.questions.map((element, index) => {
-            return (
-              <div key={ index }>
-                <Link to={`/questions/${element._id}`}>
-                  { element.questionText } [{ element.questionType }]
-                </Link>
-              </div>
-            )
-          });
-          return arrayOfQuestionDivs;
-        }
-      }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    getSingleSection = (_sectionId) => {
+        axios.get(`http://localhost:5000/api/sections/${_sectionId}`)
+        .then( responseFromApi => {
+        
+            console.log(responseFromApi.data);
+
+            this.setState({
+                questionsFromSelectedSection: responseFromApi.data.questions,
+                currentSectionObject: responseFromApi.data
+            })
+        })
+        .catch(err => console.log(err));
+    }
+
+    selectCurrentSection = (e) => {
+        const idFromBtn = e.target.firstElementChild.id;
+        const sectionIdFromBtn = idFromBtn.substring(8);
+
+        // Display questions for this section by retrieving this particular section from the database
+        this.getSingleSection(sectionIdFromBtn);
+    }
+
+    renderAddQuestionForm = () => {
+    if(!this.state.title){
+        this.getSingleSurvey();
+        } else {
+        // pass the survey and getSingleSurvey() method as a props down to AddQuestion component
+        return <AddQuestion 
+            theSurvey={this.state} 
+            getTheSurvey={this.getSingleSurvey}
+            getSingleSection={this.getSingleSection}                
+            currentSectionObject={this.state.currentSectionObject} />
+    }}
+
+    renderArrayOfQuestionsForCurrentSection() {
+        console.log(this.state.currentSectionObject.questions);
+    if (this.state.currentSectionObject.questions) {
+        const arrayOfKweks = this.state.currentSectionObject.questions.map((element, index) => {
+            return ( 
+            <div key= { element._id }>
+                { element._id } [ { element.questionType } | { element.questionText } | { element.questionDescription } ]
+            </div>
+        )
+    });
+    return arrayOfKweks;
+    }
+    }
 
       renderArrayOfSectionDivs() {
+          console.log(this.state.sections);
           if (this.state.sections) {
               const arrayOfSectionDivs = this.state.sections.map((element, index) => {
                   return (
-                    <span key={ index }> { element.sectionTitle } | </span>
+                    <span key={ element._id }  id={`sect-span-${element.sectionTitle}`} onClick={ e => this.selectCurrentSection(e) }> { element.sectionTitle } <button id={`del-sec-${element._id}` } onClick={ e => this.deleteSection(e) }>x</button> | </span>
                   )
                 });
             return arrayOfSectionDivs;
@@ -131,7 +161,10 @@ class SurveyDetails extends Component {
 
             <h1>{this.state.title}</h1>
             <p>{this.state.description}</p>
-            <SectionNav surveyId={params.id} sectionsDivs={this.renderArrayOfSectionDivs()} editMode={this.state.editMode} theSurvey={this.state} getTheSurvey={this.getSingleSurvey}/>
+            <SectionNav sectionsDivs={this.renderArrayOfSectionDivs()} editMode={this.state.editMode} theSurvey={this.state} getTheSurvey={this.getSingleSurvey} currentSection={this.state.currentSection} currentSectionId={this.state.currentSectionId} getSingleSection={this.getSingleSection}
+            />
+
+            <h2>Current Section: {this.state.currentSectionObject.sectionTitle} ({this.state.currentSectionObject._id})</h2>
 
             <hr/>
 
@@ -139,7 +172,12 @@ class SurveyDetails extends Component {
             <hr/>
 
             { this.state.questions && this.state.questions.length > 0 && <h3>Questions</h3> }
-            { this.renderArrayOfQuestionDivs()}
+            {/* { this.renderArrayOfQuestionDivs()} */}
+
+            <div style={{paddingBottom: 50}}>Questions IDs from the current sections
+            <br/>Next step is to actually display the details of these questions (e.g. the question text etc.)
+            { this.renderArrayOfQuestionsForCurrentSection() } 
+            </div>
 
           </div>
         )
