@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import About from './components/pages/About';
 import CreateSurvey from './components/views/CreateSurvey';
-import ViewSurvey from './components/views/ViewSurvey';
+// import ViewSurvey from './components/views/ViewSurvey';
 import SurveyList from './components/views/SurveyList';
 import SurveyDetails from './components/views/SurveyDetails';
 import SurveyConfig from './components/views/SurveyConfig';
@@ -44,7 +44,7 @@ class App extends Component {
                                 <Route exact path="/create-survey" component={CreateSurvey}/>
                                 {/* Eventually, you will have the view-survey route contain the id of the survey */}
                                 {/* Eventually delete this route */}
-                                <Route exact path="/view-survey" component={ViewSurvey}/>
+                                {/* <Route exact path="/view-survey" component={ViewSurvey}/> */}
                                 {/* List of all surveys */}
                                 <Route exact path="/surveys" component={SurveyList}/>
                                 {/* Edit or Delete a particular survey (Update and Delete in CRUD) */}                                

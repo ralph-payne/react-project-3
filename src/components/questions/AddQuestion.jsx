@@ -20,19 +20,16 @@ class AddQuestion extends Component {
   handleQuestionFormSubmit = (event) => {
     event.preventDefault();
     const questionTitle = this.state.title;
-    console.log(questionTitle);    
     const description = this.state.description;
-    console.log(description);        
     const questionType = this.state.questionType;
     const sectionId = this.props.currentSectionObject._id;
-    console.log(sectionId);
     // we need to know to which survey the created task belong, so we need to get its 'id'. It has to be the 'id' because we are referencing survey
     // By its id in the task model on the server side ( survey: {type: Schema.Types.ObjectId, ref: 'Survey'})
     // const surveyId = this.props.theSurvey._id;
     axios.post("http://localhost:5000/api/questions", 
     { questionTitle, description, questionType, sectionId })
     .then( (data) => {
-        console.log(data);
+
           // after submitting the form, retrieve survey one more time so the new task is displayed. Reset the fields for good UX
         this.props.getTheSurvey();
         this.props.getSingleSection(sectionId);        
@@ -123,7 +120,7 @@ AddQuestion.propTypes = {
     theSurvey: PropTypes.object.isRequired,
     getTheSurvey: PropTypes.func.isRequired,
     getSingleSection: PropTypes.func.isRequired,
-    currentSectionObject: PropTypes.object.isRequired,
+    currentSectionObject: PropTypes.object,
 }
 
 export default AddQuestion;
