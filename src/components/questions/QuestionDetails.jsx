@@ -14,12 +14,13 @@ class QuestionDetails extends Component {
   getTheQuestion = () => {
     const { params } = this.props.match;
     console.log(params);
-    // axios.get(`http://localhost:5000/api/projects/${params.id}/questions/${params.taskId}`)
-    axios.get(`http://localhost:5000/api/questions/${params.taskId}`)
+    console.log(params);
+    axios.get(`https://express-project-3.herokuapp.com//api/questions/${params.taskId}`)
 
     .then( responseFromApi =>{
       const theQuestion = responseFromApi.data;
       this.setState(theQuestion);
+      console.log(theQuestion);
     })
     .catch(err => console.log(err));
   }

@@ -1,0 +1,274 @@
+.survey-toolbar {
+    padding: 1rem;
+}
+
+.pad-3-rem {
+    padding: 3rem;
+}
+
+.pad-1-rem {
+    padding: 1rem;
+}
+
+.strong-header {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.survey-section-header {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 20px;
+    text-align: center;
+    color: #000000;
+}
+
+#new-question-input {
+    border-radius: 10px;
+}
+
+.text-box-container {
+    width: 75%;
+}
+
+.new-question-container {
+    width: 90%;
+}
+
+#question-type-container{
+    width: 95%;
+    padding: 0.75em;
+}
+
+/* exper */
+.outer-question-box {
+    /* border: 1px solid #000; */
+    display:flex;
+    width: 90%;
+    justify-content: center;
+    padding: 3px;
+}
+
+.outer-question-box > div {
+    /* border: 1px solid #000; */
+    margin: 2px;
+}
+
+.tick-icon-frame {
+    position: relative;
+    width: 50px;
+}
+
+.tick-icon {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;    
+}
+
+.new-question-box {
+    height: 80px;
+    width: 100%;
+    float: left;
+    border-radius: 10px;
+}
+
+.text-area-style {
+    border: 2px solid #765942;
+    border-radius: 10px;
+    width: 230px;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.small-text-box {
+    height: 100px;
+}
+
+
+
+.large-text-box {
+    height: 200px;
+}
+
+
+
+.pad-1 {
+    padding: 1rem;
+}
+
+.survey-toolbar-icon {
+    cursor: pointer;
+}
+
+.add-btn-symbol {
+    cursor: pointer;
+}
+
+.pad-top-10 {
+    padding-top: 10%;
+}
+
+.botao-purple {
+    font-family: 'Montserrat';
+    font-style: normal;
+    display: inline-block;
+    background-color: #dec3ff;
+    color: #333;
+    /* margin-left: 50%; */
+    padding: 0.5rem 1.5rem;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    /* margin: 0.5rem; */
+    transition: opacity 0.2s ease-in;
+    outline: none;
+    border-radius: 5px;
+}
+
+.botao-purple:hover {
+    background-color: #6900EA;
+    color: #fff;
+}
+
+.center-children {
+    text-align: center
+}
+
+.container-researcher-main {
+    height: 450px;
+    width: 80%;
+    /* If margin has two values, the first value applies to top and bottom; the second value applies to left and right */
+    margin: 1% 10%;
+}
+
+.researcher-left, .researcher-right {
+    float: left;
+    box-sizing: border-box;
+
+    /* margin: 1%;
+    padding: 10px; */
+}
+
+.researcher-left {
+    width: 58%;
+    height: 70%;
+}
+
+/* researcher-right is the div that contains the queston toolbar */
+.researcher-right {
+    width: 38%;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.horizontal-text-center {
+    text-align: center;
+}
+
+.all-capitals {
+    text-transform: uppercase;
+}
+
+.circle-pagination-button {
+    cursor: pointer;
+}
+
+/* ToolbarItem */
+
+.toolbar-item-heading {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    color: #000000;
+    padding: 1.75rem 4rem;
+    font-size: 24px;
+    line-height: 22px;
+    background-color: #EEE5E5;
+}
+
+/* When section is hovered over, the font color turns purple */
+.toolbar-item-heading:hover {
+    cursor: pointer;
+    background-color: rgba(105, 0, 234, 0.15);
+}
+
+
+/* Section navbar has gray background */
+.section-nav {
+    background-color: #E5E5E5;
+    text-align: center;
+    min-height: 70px;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+.section-heading {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    padding: 0.5rem 0.5rem 2rem 2rem;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.padding-left {
+    padding-left: 2rem;
+}
+
+/* When section is hovered over, the font color turns purple */
+.section-heading:hover {
+    color: #6900EA;
+    cursor: pointer;
+}
+
+.display-flex {
+    display: flex;
+}
+
+/* Style the form - display items horizontally */
+.form-inline {
+    align-items: center;
+    display: inline-block;
+}
+  
+  /* Add some margins for each label */
+  .form-inline label {
+    margin: 5px 10px 5px 0;
+  }
+  
+  /* Style the input fields */
+  .form-inline input {
+    vertical-align: middle;
+    margin: 5px 10px 5px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  /* Style the submit button */
+  .form-inline button {
+    margin: 5px 10px 5px 0;
+    padding: 10px 20px;
+    background-color: dodgerblue;
+    border: 1px solid #ddd;
+    color: white;
+    float: right;
+  }
+  
+  .form-inline button:hover {
+    background-color: royalblue;
+    cursor: pointer;
+  }

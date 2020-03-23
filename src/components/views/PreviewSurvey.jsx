@@ -32,7 +32,7 @@ class PreviewSurvey extends Component {
     getAllQuestions = () => {
         this.setState( { loading: true } );
         const { params } = this.props.match;
-        axios.get(`http://localhost:5000/api/surveys/${params.id}`)
+        axios.get(`https://express-project-3.herokuapp.com/api/surveys/${params.id}`)
         .then( responseFromApi => {
             const heading = responseFromApi.data.title;
             const questions = responseFromApi.data.questions;

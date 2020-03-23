@@ -1,6 +1,10 @@
 import React, { Component, Fragment  } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import HeaderWithLogo from '../layout/HeaderWithLogo';
+
+import bin from '../../images/bin.png'
+import background from '../../images/background.jpg'
 
 class SurveyList extends Component {
 
@@ -12,7 +16,7 @@ class SurveyList extends Component {
     }
 
     getAllSurveys = () => {
-        axios.get(`http://localhost:5000/api/surveys`)
+        axios.get(`https://express-project-3.herokuapp.com/api/surveys`)
         .then(responseFromApi => {
             // console.log(responseFromApi);
           this.setState({
@@ -23,11 +27,15 @@ class SurveyList extends Component {
 
     deleteSurvey = (delId) => {
         const idWithDelPrefix = delId.target.id;
+        console.log(delId);
         const idToDelete = idWithDelPrefix.substring(4);
+        console.log(idToDelete);
 
-        axios.delete(`http://localhost:5000/api/surveys/${idToDelete}`)
+        // Todo: Add a "Are you sure alert"
+
+        axios.delete(`https://express-project-3.herokuapp.com/api/surveys/${idToDelete}`)
         .then( () => {
-            this.props.history.push('/surveys');
+            this.props.history.push('/');
             this.getAllSurveys();
         })
         .catch((err)=>{
@@ -44,23 +52,35 @@ class SurveyList extends Component {
         const arrayOfSurveyDivs =
             this.state.listOfSurveys.map(survey => {
                 return (
-                    <div key={survey._id}>
-                    <span>{survey.title}</span>
+                    <div className="center-children pad-1" key={survey._id}>
+          
+                    <span className="pad-1"><Link to={`/surveys/${survey._id}/edit`}>{survey.title}</Link></span>
 
-                    <span><Link to={`/surveys/${survey._id}/preview`}>Preview</Link></span>             
-                    <span><Link to={`/surveys/${survey._id}/edit`}>Edit</Link></span>
-                    {/* <button onClick={this.deleteSurvey(survey._id)}>Delete</button> */}
-                    <button id={`del-${survey._id}`} onClick={e => this.deleteSurvey(e)}>Delete</button>
-                    <span><Link to={`/surveys/${survey._id}/config`}>Config</Link></span>
+
+                    <span className="pad-1 survey-toolbar-icon" onClick={e => this.deleteSurvey(e)}>
+                        <img id={`del-${survey._id}`} style={{width: 30, height: 30}} src={bin}/></span>
+
                     </div>
                 );
             });
+
+
     
     
         return (
             <Fragment>
-                <div>
-                <Link to={'/create-survey'}>Create New Survey</Link>
+
+                
+                
+                <div  styles={{ backgroundImage: {background} }}>
+                
+                <HeaderWithLogo title={'Survey Stueff'}/>
+
+                <div className="center-children pad-top-10">
+                    <Link to={'/create-survey'}>
+                        <button className="botao-purple">Create New Survey</button>
+                    </Link>
+                </div>
                 </div>
                 <div>
                     {arrayOfSurveyDivs}

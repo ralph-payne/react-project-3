@@ -15,8 +15,7 @@ class PreviewQuestion extends Component {
         const { params } = this.props.match;
         console.log(`preview question`);
         console.log(params.id);
-        // axios.get(`http://localhost:5000/api/projects/${params.id}/questions/${params.taskId}`)
-        axios.get(`http://localhost:5000/api/questions/${params.id}`)
+        axios.get(`https://express-project-3.herokuapp.com/api/questions/${params.id}`)
         .then( responseFromApi =>{
           const theQuestion = responseFromApi.data;
           console.log(theQuestion)

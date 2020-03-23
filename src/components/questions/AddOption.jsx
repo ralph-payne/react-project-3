@@ -19,7 +19,7 @@ class AddOption extends Component {
         const questionType = this.state.questionType;
         const surveyId = this.props.theSurvey._id;
 
-        axios.post("http://localhost:5000/api/options", { title, description, questionType, surveyId })
+        axios.post("https://express-project-3.herokuapp.com/api/options", { title, description, questionType, surveyId })
             .then( (data) => {
                 console.log(data);
                 // after submitting the form, retrieve survey one more time so the new task is displayed. Reset the fields for good UX
@@ -38,7 +38,7 @@ class AddOption extends Component {
         return (
             <div>
             <hr/>
-                <label>Option:</label>
+                <label>Option {this.props.numberOfOptions + 1}:</label>
                 <textarea name="option" value={this.state.description} onChange={ e => this.handleChange(e)} />
                 <button>Add Option</button>
             <hr/>
@@ -51,7 +51,8 @@ class AddOption extends Component {
 AddOption.propTypes = {
     addQuestionState: PropTypes.object.isRequired,
     getTheSurvey: PropTypes.func.isRequired,
-    showOptions: PropTypes.func.isRequired
+    getOptions: PropTypes.func.isRequired,
+    numberOfOptions: PropTypes.number
 }
 
 export default AddOption;

@@ -28,7 +28,7 @@ class SurveyConfig extends Component {
 
     getSingleSurvey = () => {
         const { params } = this.props.match;
-        axios.get(`http://localhost:5000/api/surveys/${params.id}`)
+        axios.get(`https://express-project-3.herokuapp.com/api/surveys/${params.id}`)
         .then( responseFromApi => {
             // The response from the API will return the title, the description and an array of questions
             const questionsRetrievedFromApi = responseFromApi.data.questions;
@@ -69,7 +69,7 @@ class SurveyConfig extends Component {
 
     deleteSurvey = () => {
         const { params } = this.props.match;
-        axios.delete(`http://localhost:5000/api/surveys/${params.id}`)
+        axios.delete(`https://express-project-3.herokuapp.com/api/surveys/${params.id}`)
         .then( () => {
             this.props.history.push('/surveys');
         })

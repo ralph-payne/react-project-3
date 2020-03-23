@@ -1,3 +1,4 @@
-## Start App
+Ironhack Project 3 (Front End)
 
-npm start (wait for 10-30 seconds and then localhost:3001 will pop up)
+## Start App
+npm start (and wait for 20-30 seconds)

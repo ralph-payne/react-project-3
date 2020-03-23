@@ -15,7 +15,7 @@ class EditSurvey extends Component {
 
     event.preventDefault();
 
-    axios.put(`http://localhost:5000/api/surveys/${this.props.theSurvey._id}`, { title, description })
+    axios.put(`https://express-project-3.herokuapp.com/api/surveys/${this.props.theSurvey._id}`, { title, description })
     .then( () => {
         this.props.getTheSurvey();
         // after submitting the form, redirect to '/surveys'

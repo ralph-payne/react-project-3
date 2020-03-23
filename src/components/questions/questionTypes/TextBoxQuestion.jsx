@@ -5,7 +5,7 @@ const TextBoxQuestion = ( { _id, questionText} ) => {
         <div id={_id}>
             <span>{questionText}</span>
             <span>
-                <input type="text"/>
+                <input className="text-area-style" type="text"/>
             </span>
         </div>
     );

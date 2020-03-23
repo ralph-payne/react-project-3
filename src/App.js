@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // We want to wrap our routes in a Switch so that it shows one at a time
 // Next step is creating a new folder in components where you can store the pages
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
+// import Navbar from './components/layout/Navbar';
 import About from './components/pages/About';
 import CreateSurvey from './components/views/CreateSurvey';
 // import ViewSurvey from './components/views/ViewSurvey';
@@ -37,8 +37,8 @@ class App extends Component {
 
             <Router>
                 <div className='App'>
-                    <Navbar />
-                        <div className='container'>
+                    {/* <Navbar /> */}
+                        {/* <div className='container'> */}
                             <Switch>
                                 {/* Create a new survey (Create in CRUD) */}                                
                                 <Route exact path="/create-survey" component={CreateSurvey}/>
@@ -46,7 +46,7 @@ class App extends Component {
                                 {/* Eventually delete this route */}
                                 {/* <Route exact path="/view-survey" component={ViewSurvey}/> */}
                                 {/* List of all surveys */}
-                                <Route exact path="/surveys" component={SurveyList}/>
+                                <Route exact path="/" component={SurveyList}/>
                                 {/* Edit or Delete a particular survey (Update and Delete in CRUD) */}                                
                                 <Route exact path="/surveys/:id/edit" component={SurveyDetails}/>
                                 {/* Preview a survey as a user would (Read in CRUD) */}
@@ -57,7 +57,7 @@ class App extends Component {
                                 <Route exact path='/about' component={About} />
                             </Switch>
                         </div>
-                </div>
+                {/* </div> */}
             </Router>
             )
         }
