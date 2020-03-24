@@ -1,3 +1,18 @@
+body {
+    font-family: 'Montserrat';
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: #ffffff;
+    color: #333;
+}
+
+input {
+    font-family: 'Montserrat';
+    display: inline-block;
+    font-size: 1.1rem;
+}
+  
+
 .survey-toolbar {
     padding: 1rem;
 }
@@ -14,7 +29,7 @@
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     color: #333;
 }
 
@@ -28,30 +43,38 @@
     color: #000000;
 }
 
+/* Text box for new question */
 #new-question-input {
     border-radius: 10px;
+    margin-top: 30px;
+    margin-left: 10px;
+    width: 90%;
 }
 
 .text-box-container {
-    width: 75%;
+    width: 96%;
+    margin: 2%;
 }
 
 .new-question-container {
     width: 90%;
+    margin: 5%;
 }
 
+/* Container for Displaying the question type*/
 #question-type-container{
-    width: 95%;
-    padding: 0.75em;
+    width: 96%;
+    margin: 2%;
+    /* padding: 0.75em; */
 }
 
 /* exper */
 .outer-question-box {
     /* border: 1px solid #000; */
     display:flex;
-    width: 90%;
+    width: 96%;
+    margin: 2%;
     justify-content: center;
-    padding: 3px;
 }
 
 .outer-question-box > div {
@@ -87,19 +110,17 @@
 .text-area-style {
     border: 2px solid #765942;
     border-radius: 10px;
-    width: 230px;
-    padding: 1rem;
-    margin: 1rem;
+    width: 100%;
+    /* padding: 1rem; */
+    /* margin: 5%; */
 }
 
 .small-text-box {
-    height: 100px;
+    height: 75px;
 }
 
-
-
 .large-text-box {
-    height: 200px;
+    height: 150px;
 }
 
 
@@ -147,10 +168,10 @@
 }
 
 .container-researcher-main {
-    height: 450px;
+    height: 160px;
     width: 80%;
     /* If margin has two values, the first value applies to top and bottom; the second value applies to left and right */
-    margin: 1% 10%;
+    margin: 2% 10%;
 }
 
 .researcher-left, .researcher-right {
@@ -192,9 +213,9 @@
     font-style: normal;
     font-weight: 500;
     color: #000000;
-    padding: 1.75rem 4rem;
-    font-size: 24px;
-    line-height: 22px;
+    padding: 1rem 2rem;
+    font-size: 18px;
+    line-height: 18px;
     background-color: #EEE5E5;
 }
 
@@ -209,7 +230,7 @@
 .section-nav {
     background-color: #E5E5E5;
     text-align: center;
-    min-height: 70px;
+    height: 60px;
     display: flex;
     align-items: center; 
     justify-content: center;
@@ -219,7 +240,7 @@
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
-    padding: 0.5rem 0.5rem 2rem 2rem;
+    padding: 0rem 0.5rem;
     font-size: 18px;
     line-height: 22px;
 }
@@ -244,31 +265,131 @@
     display: inline-block;
 }
   
-  /* Add some margins for each label */
-  .form-inline label {
+/* Add some margins for each label */
+.form-inline label {
     margin: 5px 10px 5px 0;
-  }
-  
-  /* Style the input fields */
-  .form-inline input {
+}
+
+.new-section-input {
+    height: 20px;
+    border: 3px solid #ddd;
+    border-radius: 10%;
+    margin-top: 20px;
+}
+
+
+/* Style the input fields */
+.form-inline input {
     vertical-align: middle;
-    margin: 5px 10px 5px 0;
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
+    margin-top: 10px;
+    border-radius: 5%;
+}
+  
+
+
+
+/* Question Types */
+  /* The container */
+.container-for-scale-question {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   
-  /* Style the submit button */
-  .form-inline button {
-    margin: 5px 10px 5px 0;
-    padding: 10px 20px;
-    background-color: dodgerblue;
-    border: 1px solid #ddd;
-    color: white;
-    float: right;
-  }
-  
-  .form-inline button:hover {
-    background-color: royalblue;
+  /* Hide the browser's default radio button */
+  .container-for-scale-question input {
+    position: absolute;
+    opacity: 0;
     cursor: pointer;
   }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 21px;
+    width: 21px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+ .container-for-scale-question:hover input ~ .checkmark {
+    background: #6900EA;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+ .container-for-scale-question input:checked ~ .checkmark {
+    background: #6900EA;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container-for-scale-question input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  /* The top, left, width and height should be equal to the height and width of the checkmark */
+  .container-for-scale-question .checkmark:after {
+    top: 7px;
+    left: 7px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: white;
+  }
+
+
+  /* Header with logo */
+
+  /* Purple Text for Header */
+.purple-uxd {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.5rem;
+    line-height: 22px;
+    color: #6900EA;
+    text-align: center;
+    padding: 0.25rem;
+}
+
+
+.question-text {
+    font-style: normal;
+    font-size: 2.0rem;
+    font-weight: 400;
+    line-height: 44px;
+    text-align: center;
+}
+
+
+.all-caps {
+    text-transform: uppercase;
+}
+
+.mar-x-1 {
+    margin: 0rem 1rem;
+}
+
+#create-survey-form {
+    height: 70%;
+}

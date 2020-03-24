@@ -6,37 +6,37 @@ const SevenPointScale = ( ) => {
     return (
         <Fragment>
 
-                <label className="container">One
+                <label className="container-for-scale-question">One
                     <input type="radio" name="seven-point-scale"/>
                     <span className="checkmark"></span>
                 </label>
 
-                <label className="container">Two
+                <label className="container-for-scale-question">Two
                     <input type="radio" name="seven-point-scale"/>
                     <span className="checkmark"></span>
                 </label>
 
-                <label className="container">Three
+                <label className="container-for-scale-question">Three
                     <input type="radio" name="seven-point-scale"/>
                     <span className="checkmark"></span>
                 </label>
 
-                <label className="container">Four
+                <label className="container-for-scale-question">Four
                     <input type="radio" name="seven-point-scale"/>
                     <span className="checkmark"></span>
                 </label>
 
-                <label className="container">Five
+                <label className="container-for-scale-question">Five
                     <input type="radio" name="seven-point-scale"/>
                     <span className="checkmark"></span>
                 </label>
 
-                <label className="container">Six
+                <label className="container-for-scale-question">Six
                     <input type="radio" name="seven-point-scale"/>
                     <span className="checkmark"></span>
                 </label>
 
-                <label className="container">Seven
+                <label className="container-for-scale-question">Seven
                     <input type="radio" name="seven-point-scale"/>
                     <span className="checkmark"></span>
                 </label>

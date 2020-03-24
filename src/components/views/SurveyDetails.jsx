@@ -396,10 +396,10 @@ class SurveyDetails extends Component {
                 <div className="horizontal-text-center survey-toolbar">
                     {/* <h1>{this.state.title}</h1> */}
                     <Fragment>
-                        <Link to={'/'}><span className="pad-1 survey-toolbar-icon"><img style={{width: 50, height: 50}} src={backward}/></span></Link>
-                        <span className="pad-1 survey-toolbar-icon" onClick={() => this.toggleViewOrEdit('view')}><img style={{width: 50, height: 50}} src={eye}/></span>
-                        <span className="pad-1 survey-toolbar-icon" onClick={() => this.toggleViewOrEdit('edit')}><img style={{width: 50, height: 50}} src={pen}/></span>
-                        <span className="pad-1 survey-toolbar-icon"><img style={{width: 50, height: 50}} src={config}/></span>
+                        <Link to={'/'}><span className="pad-1 survey-toolbar-icon"><img style={{width: 35, height: 35}} src={backward}/></span></Link>
+                        <span className="pad-1 survey-toolbar-icon" onClick={() => this.toggleViewOrEdit('view')}><img style={{width: 35, height: 35}} src={eye}/></span>
+                        <span className="pad-1 survey-toolbar-icon" onClick={() => this.toggleViewOrEdit('edit')}><img style={{width: 35, height: 35}} src={pen}/></span>
+                        <span className="pad-1 survey-toolbar-icon"><img style={{width: 35, height: 35}} src={config}/></span>
                     </Fragment>
                 </div>
 
@@ -440,11 +440,8 @@ class SurveyDetails extends Component {
 
 
                 { !editMode &&
-                    <h1 className="question-text">{currentQuestionObject.questionText}</h1> 
-                }
-
-                
-            
+                    <div className="question-text">{currentQuestionObject.questionText}</div> 
+                }           
 
             {/* Question pagination with circles */}
             { currentSectionObject.questions &&

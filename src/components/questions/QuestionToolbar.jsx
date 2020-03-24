@@ -15,7 +15,7 @@ const QuestionToolbar = ( { changeQuestionTypeView } ) => {
                 arrayOfToolbarItems.map((element, index) => (
                 <div
                     id={`typ-div-${index}`} 
-                    className="toolbar-item-heading purple-uxd" 
+                    className="toolbar-item-heading" 
                     key={index} 
                     onClick={changeQuestionTypeView}>
                                         

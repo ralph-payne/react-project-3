@@ -78,14 +78,12 @@ class QuestionCreator extends Component {
                 {/* <span className="display-flex"> */}
             { this.props.editMode &&
                 <Fragment>
-                <div 
-                    className="outer-question-box">
+                <div className="outer-question-box">
                     <div className="new-question-box">                
                     <input type="text"
-                            
-                            id="new-question-input" 
-                            placeholder="New Question..." 
-                            name="new-question-input" 
+                    id="new-question-input" 
+                    placeholder="New Question..." 
+                    name="new-question-input" 
                     value={this.state.questionText} onChange={e => this.handleChangeAddQuestionText(e)}
                     />
                     </div>

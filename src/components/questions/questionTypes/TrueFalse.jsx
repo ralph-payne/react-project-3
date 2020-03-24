@@ -6,12 +6,12 @@ const TrueFalse = ( ) => {
     return (
         <Fragment>
 
-                <label className="container">True
+                <label className="container-for-scale-question">True
                     <input type="radio" name="true-false"/>
                     <span className="checkmark"></span>
                 </label>
 
-                <label className="container">False
+                <label className="container-for-scale-question">False
                     <input type="radio" name="true-false"/>
                     <span className="checkmark"></span>
                 </label>

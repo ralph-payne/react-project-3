@@ -18,7 +18,7 @@ const FivePointScale = ( ) => {
             {
                 arrayOfAnswers.map((element, index) => {
                     return (
-                    <label className="container" key={index}>{element}
+                    <label className="container-for-scale-question" key={index}>{element}
                     <input type="radio" name="five-point-scale"/>
                     <span className="checkmark"></span>
                     </label>

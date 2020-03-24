@@ -24,3 +24,5 @@ yarn-error.log*
 
 # own files
 /notes
+
+AppCssLegacy.css

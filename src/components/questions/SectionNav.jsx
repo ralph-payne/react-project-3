@@ -98,12 +98,16 @@ class SectionNav extends Component {
                                 })
                             }
                         
-                            <form className="form-inline" onSubmit={this.handleAddSectionForm}>
+                            {/* <form className="form-inline" onSubmit={this.handleAddSectionForm}> */}
                             <span className="display-flex padding-left">
                             { this.props.editMode &&
                                 <Fragment>
-                                    <input type="text" id="new-section-input" placeholder="New Section" name="new-section-input" 
-                                    value={this.state.sectionTitle} onChange={e => this.handleChangeAddSectionTitle(e)}
+                                    <input type="text" 
+                                        id="new-section-input" 
+                                        placeholder="New Section..." name="new-section-input" 
+                                        value={this.state.sectionTitle} 
+                                        onChange={e => this.handleChangeAddSectionTitle(e)}
+                                        className="new-section-input"
                                     />
                                     {/* <button type="submit">Submit</button> */}
                                     <span className="pad-1 survey-toolbar-icon" onClick={this.handleAddSectionForm}>
@@ -117,7 +121,7 @@ class SectionNav extends Component {
                             } */}
 
                             </span>
-                            </form>
+                            {/* </form> */}
                             
                         </div>
                     </div>

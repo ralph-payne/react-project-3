@@ -1,18 +1,13 @@
 /*
+Header with Logo
 Capital Letters
 Centered text
 Purple Text
 White background
-
 */
-
-
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-
-import '../../styles/HeaderWithLogo.css';
-// import '../App.css'
 
 const HeaderWithLogo =  ( { icon, title } ) => {
 
